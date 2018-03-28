@@ -19,6 +19,7 @@ ext {
 
 dependencies {
     compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.6'
+    compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
 }
 
 sourceSets {

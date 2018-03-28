@@ -1,3 +1,4 @@
+import helper.CSVHelper;
 import helper.TwitterHelper;
 import twitter4j.*;
 
@@ -15,14 +16,24 @@ public class TwitterManage {
 
         try {
             List<Status> result = twitterHelper.getTweetList(query,150);
-            System.out.println("전체개수===>"+result.size());
-            for(Status status : result){
-                System.out.println("[twitter] :" + status.getText());
-                System.out.println("");
+
+            //조회한 객체 출력
+            twitterHelper.printOriginTweet(result);
+
+            //CSV로 Export
+            CSVHelper csvHelper = new CSVHelper();
+            boolean finishExport = csvHelper.write(result);
+            if(finishExport == true){
+                System.out.println("========== SUCCESS TO EXPORT TWITTER =============");
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
+
+
     }
+
+
 }

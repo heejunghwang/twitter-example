@@ -2,6 +2,7 @@ package helper;
 
 import config.TwitterConfiguration;
 import twitter4j.*;
+import model.TweetPost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +25,14 @@ public class TwitterHelper {
      * @throws Exception
      */
     public List<Status> getTweetList(Query query, int totalCount) throws Exception{
-        List<Status> result = null;
+        List<Status> tweetList = null;
         if(totalCount < 100){
             query.setCount(totalCount);
-            result = this.getTweetBlock(query);
+            tweetList = this.getTweetBlock(query);
         }else{
-            result = this.getTweetBulk(query, totalCount);
+            tweetList = this.getTweetBulk(query, totalCount);
         }
-
-        return result;
+        return tweetList;
     }
 
 
@@ -96,6 +96,49 @@ public class TwitterHelper {
             }
         }
         return result;
+    }
+
+
+    /**
+     * TweetPost.java 객체로 변환한다.
+     * @param tweetList
+     * @return
+     */
+    public List<TweetPost> convertTweetPost(List<Status> tweetList){
+        List<TweetPost> result = null;
+
+        if(tweetList != null){
+            result = new ArrayList<>();
+            for(Status status : tweetList){
+                TweetPost tw = new TweetPost();
+                tw.setId(status.getId());
+
+                String text = status.getText().replaceAll("(\r\n|\n)", " ")
+                                .replaceAll("\"","\'")
+                                .replaceAll(",","");
+
+                tw.setText(text);
+                tw.setLang(status.getLang());
+                tw.setCreatedAt(status.getCreatedAt());
+                result.add(tw);
+            }
+        }
+        return result;
+
+    }
+
+    /**
+     * 트위터 원본 출력
+     * @param tweetList
+     */
+    public void printOriginTweet(List<Status> tweetList){
+        if(tweetList != null){
+            System.out.println("전체개수 ===> " + tweetList.size());
+            for(Status status : tweetList) {
+                System.out.println("[twitter] :" + status.getText());
+            }
+
+        }
     }
 
 }
