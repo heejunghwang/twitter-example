@@ -1,0 +1,33 @@
+group 'com.javacafe.twitter'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = '1.4.2.RELEASE'
+    slf4jVersion = '1.7.21'
+    log4j2Version = '2.5'
+    commonsLogging = '1.2'
+}
+
+
+dependencies {
+    compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.6'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs "src/main/java"
+        }
+        resources {
+            srcDirs "src/main/resources"
+        }
+    }
+}
