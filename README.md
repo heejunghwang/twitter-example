@@ -1,10 +1,10 @@
 # twitter-example
 
-트위터 API를 이용하여 실시간 트위터를 가져오는 예제입니다.
+트위터 API를 이용하여 실시간 트위터 데이터를 가져오는 예제입니다.
 
 ## 실행방법
 ### 트위터에서 발급받은 인증정보 정보 입력
-* [트위터 인증 발금 사이트](https://apps.twitter.com/)
+* [트위터 인증 발급 사이트](https://apps.twitter.com/)
 * config/TwitterConfiguration.java
 ~~~
     String consumerKey = "===========================";
@@ -45,6 +45,8 @@
 [twitter] :RT @127OX9: 롯데타워 79층에서 본.. 현재 하늘...^^
 미세먼지 너무 심한데 ,, 아까 재난문자옴 ㅠㅠ https://t.co/T03A8SFYZ0
 ~~~
+
+* 엑셀로 내보내기 경로 :  `resources/tweet.csv`
 
 ### 참고 사이트
 * http://twitter4j.org/
